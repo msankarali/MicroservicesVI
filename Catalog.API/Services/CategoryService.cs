@@ -7,12 +7,12 @@ using Utilities.Results;
 
 namespace Catalog.API.Services
 {
-    internal class CatagoryService : ICategoryService
+    internal class CategoryService : ICategoryService
     {
         private readonly IMongoCollection<Category> _categoryCollection;
         private readonly IMapper _mapper;
 
-        public CatagoryService(IMapper mapper, IDatabaseSettings databaseSettings)
+        public CategoryService(IMapper mapper, IDatabaseSettings databaseSettings)
         {
             var client = new MongoClient(databaseSettings.ConnectionString);
 
