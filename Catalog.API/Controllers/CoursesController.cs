@@ -11,7 +11,7 @@ namespace Catalog.API.Controllers
     {
         private readonly ICourseService _courseService;
 
-        public CoursesController(ICourseService courseService)
+        internal CoursesController(ICourseService courseService)
         {
             _courseService = courseService;
         }

@@ -7,7 +7,7 @@ namespace Catalog.API.Services
     internal interface ICategoryService
     {
         Task<ApiResponse<List<CategoryDto>>> GetAllAsync();
-        Task<ApiResponse<CategoryDto>> CreateAsync(Category category);
+        Task<ApiResponse<CategoryDto>> CreateAsync(CategoryDto category);
         Task<ApiResponse<CategoryDto>> GetByIdAsync(string id);
     }
 }

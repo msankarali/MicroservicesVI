@@ -30,8 +30,10 @@ namespace Catalog.API.Services
             return ApiResponse<List<CategoryDto>>.Success(_mapper.Map<List<CategoryDto>>(categories), 200);
         }
 
-        public async Task<ApiResponse<CategoryDto>> CreateAsync(Category category)
+        public async Task<ApiResponse<CategoryDto>> CreateAsync(CategoryDto categoryDto)
         {
+            var category = _mapper.Map<Category>(categoryDto);
+
             await _categoryCollection.InsertOneAsync(category);
 
             return ApiResponse<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200);
