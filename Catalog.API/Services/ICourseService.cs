@@ -3,7 +3,7 @@ using Utilities.Results;
 
 namespace Catalog.API.Services
 {
-    internal interface ICourseService
+    public interface ICourseService
     {
         Task<ApiResponse<List<CourseDto>>> GetAllAsync();
         Task<ApiResponse<CourseDto>> GetByIdAsync(string id);

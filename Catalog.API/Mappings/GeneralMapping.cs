@@ -9,6 +9,7 @@ namespace Catalog.API.Mappings
         public GeneralMapping()
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryCreateDto>().ReverseMap();
             CreateMap<Feature, FeatureDto>().ReverseMap();
 
             CreateMap<Course, CourseDto>().ReverseMap();

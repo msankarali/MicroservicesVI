@@ -1,6 +1,6 @@
 ﻿namespace Catalog.API.Models
 {
-    internal class Feature
+    public class Feature
     {
         public int Duration { get; set; }
     }

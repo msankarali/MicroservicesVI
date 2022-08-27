@@ -7,7 +7,7 @@ using Utilities.Results;
 
 namespace Catalog.API.Services
 {
-    internal class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly IMongoCollection<Category> _categoryCollection;
         private readonly IMapper _mapper;
@@ -30,9 +30,9 @@ namespace Catalog.API.Services
             return ApiResponse<List<CategoryDto>>.Success(_mapper.Map<List<CategoryDto>>(categories), 200);
         }
 
-        public async Task<ApiResponse<CategoryDto>> CreateAsync(CategoryDto categoryDto)
+        public async Task<ApiResponse<CategoryDto>> CreateAsync(CategoryCreateDto categoryCreateDto)
         {
-            var category = _mapper.Map<Category>(categoryDto);
+            var category = _mapper.Map<Category>(categoryCreateDto);
 
             await _categoryCollection.InsertOneAsync(category);
 

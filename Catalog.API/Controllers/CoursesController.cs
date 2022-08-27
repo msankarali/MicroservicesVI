@@ -7,11 +7,11 @@ namespace Catalog.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    internal class CoursesController : BaseController
+    public class CoursesController : BaseController
     {
         private readonly ICourseService _courseService;
 
-        internal CoursesController(ICourseService courseService)
+        public CoursesController(ICourseService courseService)
         {
             _courseService = courseService;
         }
@@ -32,6 +32,7 @@ namespace Catalog.API.Controllers
             return CreateActionResultInstance(response);
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
             var response = await _courseService.GetAllAsync();

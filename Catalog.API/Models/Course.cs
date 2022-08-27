@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Catalog.API.Models
 {
-    internal class Course
+    public class Course
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

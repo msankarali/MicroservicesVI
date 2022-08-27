@@ -4,10 +4,10 @@ using Utilities.Results;
 
 namespace Catalog.API.Services
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         Task<ApiResponse<List<CategoryDto>>> GetAllAsync();
-        Task<ApiResponse<CategoryDto>> CreateAsync(CategoryDto category);
+        Task<ApiResponse<CategoryDto>> CreateAsync(CategoryCreateDto categoryCreateDto);
         Task<ApiResponse<CategoryDto>> GetByIdAsync(string id);
     }
 }
