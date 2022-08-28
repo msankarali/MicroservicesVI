@@ -4,11 +4,11 @@ namespace Discount.API.Services
 {
     public interface IDiscountService
     {
-        Task<ApiResponse<List<Entities.Discount>>> GetAll();
-        Task<ApiResponse<Entities.Discount>> GetById(int id);
-        Task<ApiResponse<NoContent>> Add(Entities.Discount discount);
-        Task<ApiResponse<NoContent>> Update(Entities.Discount discount);
-        Task<ApiResponse<NoContent>> DeleteById(int id);
-        Task<ApiResponse<Entities.Discount>> GetByCodeAndUserId(string code, string userId);
+        Task<ApiResponse<List<Entities.Discount>>> GetAllAsync();
+        Task<ApiResponse<Entities.Discount>> GetByIdAsync(int id);
+        Task<ApiResponse<NoContent>> AddAsync(Entities.Discount discount);
+        Task<ApiResponse<NoContent>> UpdateAsync(Entities.Discount discount);
+        Task<ApiResponse<NoContent>> DeleteByIdAsync(int id);
+        Task<ApiResponse<Entities.Discount>> GetByCodeAndUserIdAsync(string code, string userId);
     }
 }

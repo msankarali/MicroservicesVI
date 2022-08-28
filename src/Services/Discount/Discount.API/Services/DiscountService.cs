@@ -20,7 +20,7 @@ namespace Discount.API.Services
             _discountCommandText = discountCommandText;
         }
 
-        public async Task<ApiResponse<NoContent>> DeleteById(int id)
+        public async Task<ApiResponse<NoContent>> DeleteByIdAsync(int id)
         {
             var rowsAffected = await _dbConnection.ExecuteAsync(_discountCommandText.DeleteById, new { Id = id });
 
@@ -29,14 +29,14 @@ namespace Discount.API.Services
                 : ApiResponse<NoContent>.Fail(404, "Discount not found");
         }
 
-        public async Task<ApiResponse<List<Entities.Discount>>> GetAll()
+        public async Task<ApiResponse<List<Entities.Discount>>> GetAllAsync()
         {
             var discountList = await _dbConnection.QueryAsync<Entities.Discount>(_discountCommandText.GetAll);
 
             return ApiResponse<List<Entities.Discount>>.Success(discountList.ToList(), 200);
         }
 
-        public async Task<ApiResponse<Entities.Discount>> GetByCodeAndUserId(string code, string userId)
+        public async Task<ApiResponse<Entities.Discount>> GetByCodeAndUserIdAsync(string code, string userId)
         {
             var discountList = await _dbConnection.QueryAsync<Entities.Discount>(_discountCommandText.GetByCodeAndUserId, new
             {
@@ -50,7 +50,7 @@ namespace Discount.API.Services
                 : ApiResponse<Entities.Discount>.Success(discount, 200);
         }
 
-        public async Task<ApiResponse<Entities.Discount>> GetById(int id)
+        public async Task<ApiResponse<Entities.Discount>> GetByIdAsync(int id)
         {
             var discount = (await _dbConnection.QueryAsync<Entities.Discount>(_discountCommandText.GetById, new { Id = id })).SingleOrDefault();
 
@@ -62,7 +62,7 @@ namespace Discount.API.Services
             return ApiResponse<Entities.Discount>.Success(discount, 200);
         }
 
-        public async Task<ApiResponse<NoContent>> Add(Entities.Discount discount)
+        public async Task<ApiResponse<NoContent>> AddAsync(Entities.Discount discount)
         {
             var rowsAffected = await _dbConnection.ExecuteAsync(_discountCommandText.Add, discount);
 
@@ -74,7 +74,7 @@ namespace Discount.API.Services
             return ApiResponse<NoContent>.Fail(500, "An error occured while adding discount");
         }
 
-        public async Task<ApiResponse<NoContent>> Update(Entities.Discount discount)
+        public async Task<ApiResponse<NoContent>> UpdateAsync(Entities.Discount discount)
         {
 
             var rowsAffected = await _dbConnection.ExecuteAsync(_discountCommandText.Update, new
