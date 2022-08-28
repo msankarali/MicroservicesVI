@@ -13,6 +13,17 @@ namespace FileStock.API.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveImageAsync(IFormFile formFile, CancellationToken cancellationToken)
         {
+            var fileExtension = Path.GetExtension(formFile.FileName);
+
+            if (
+                string.IsNullOrEmpty(fileExtension) ||
+                fileExtension.ToLower() != ".jpg" ||
+                fileExtension.ToLower() != ".png" ||
+                fileExtension.ToLower() != ".bmp")
+            {
+                return CreateActionResultInstance(ApiResponse<NoContent>.Fail(400, "Not a valid file"));
+            }
+
             if (formFile != null && formFile.Length > 0)
             {
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", formFile.FileName);
