@@ -67,6 +67,8 @@ namespace IdentityServerV4
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.OfflineAccess, // even if the user has no internet, we can obtain a new token using refresh-token, you really wanna allow offline access? :) think twice more
+                        IdentityServerConstants.LocalApi.ScopeName,
+                        "roles"
                     },
                     AccessTokenLifetime = 1 * 60 * 60,
                     RefreshTokenExpiration = TokenExpiration.Absolute,
