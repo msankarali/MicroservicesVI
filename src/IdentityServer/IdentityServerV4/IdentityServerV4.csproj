@@ -24,6 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
   </ItemGroup>
 </Project>
