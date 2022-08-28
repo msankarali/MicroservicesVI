@@ -1,8 +1,10 @@
 using Discount.API.Queries;
+using Discount.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using Utilities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,16 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+builder.Services.AddScoped<IDiscountService, DiscountService>();
 builder.Services.AddSingleton<IDiscountCommandText, PostgreDiscountCommandText>();
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-var requeiredReadDiscountPolicy = new AuthorizationPolicyBuilder("scope", "discount_read_permission").Build();
+var requiredReadDiscountPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().RequireClaim("scope", "discount_read_permission").Build();
 var requiredAuthorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter(requiredAuthorizationPolicy));
-    options.Filters.Add(new AuthorizeFilter(requeiredReadDiscountPolicy));
+    options.Filters.Add(new AuthorizeFilter(requiredReadDiscountPolicy));
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
