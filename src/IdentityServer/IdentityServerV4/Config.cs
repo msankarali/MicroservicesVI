@@ -14,7 +14,8 @@ namespace IdentityServerV4
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
             new ApiResource("resource_catalog"){Scopes = {"catalog_fullpermission"}},
-            new ApiResource("photo_stock_catalog"){Scopes = {"photo_stock_fullpermission"}},
+            new ApiResource("resource_file_stock"){Scopes = {"file_stock_fullpermission"}},
+            new ApiResource("resource_basket"){Scopes = {"basket_fullpermission"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
 
         };
@@ -38,7 +39,8 @@ namespace IdentityServerV4
             new ApiScope[]
             {
                 new ApiScope("catalog_fullpermission", "Full access to Catalog API"),
-                new ApiScope("photo_stock_fullpermission", "Full access to Photo Stock API"),
+                new ApiScope("file_stock_fullpermission", "Full access to Photo Stock API"),
+                new ApiScope("basket_fullpermission", "Full access to Basket API"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName, "Full access to IS4"),
 
             };
@@ -52,7 +54,7 @@ namespace IdentityServerV4
                     ClientId = "WebMvcClient",
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials, // it has no refresh-token
-                    AllowedScopes = {"catalog_fullpermission", "photo_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName}
+                    AllowedScopes = {"catalog_fullpermission", "file_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName}
                 },
                 new Client
                 {
@@ -68,7 +70,8 @@ namespace IdentityServerV4
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.OfflineAccess, // even if the user has no internet, we can obtain a new token using refresh-token, you really wanna allow offline access? :) think twice more
                         IdentityServerConstants.LocalApi.ScopeName,
-                        "roles"
+                        "roles",
+                        "basket_fullpermission",
                     },
                     AccessTokenLifetime = 1 * 60 * 60,
                     RefreshTokenExpiration = TokenExpiration.Absolute,
