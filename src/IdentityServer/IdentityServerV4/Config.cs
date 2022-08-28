@@ -58,6 +58,7 @@ namespace IdentityServerV4
                 {
                     ClientName = "Asp.Net Core MVC",
                     ClientId = "WebMvcClientForUser",
+                    AllowOfflineAccess = true,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword, // it generated refresh-token
                     AllowedScopes =
