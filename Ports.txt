@@ -1,4 +1,5 @@
 Services
 - Catalog.API => 5011
 - PhotoStock.API => 5012
-IdentityServerV4 => 5001
+- Basket.API => 5013
+• IdentityServerV4 => 5001
