@@ -2,7 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServerV4.Data;
+using IdentityServerV4.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,22 +41,28 @@ namespace IdentityServerV4
 
             try
             {
-                var seed = args.Contains("/seed");
-                if (seed)
-                {
-                    args = args.Except(new[] { "/seed" }).ToArray();
-                }
-
                 var host = CreateHostBuilder(args).Build();
 
-                if (seed)
+                using (var scope = host.Services.CreateScope())
                 {
-                    Log.Information("Seeding database...");
-                    var config = host.Services.GetRequiredService<IConfiguration>();
-                    var connectionString = config.GetConnectionString("DefaultConnection");
-                    SeedData.EnsureSeedData(connectionString);
-                    Log.Information("Done seeding database.");
-                    return 0;
+                    var serviceProvider = scope.ServiceProvider;
+
+                    var applicationDbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+                    applicationDbContext.Database.Migrate();
+
+                    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                    if (!userManager.Users.Any())
+                    {
+                        var result = userManager.CreateAsync(new ApplicationUser
+                        {
+                            UserName = "mservetankarali",
+                            Email = "mservetankarali@gmail.com",
+                            City = "Istanbul",
+
+                        }, "Pa55word.").Result;
+                    }
                 }
 
                 Log.Information("Starting host...");
