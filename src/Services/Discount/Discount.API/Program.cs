@@ -1,16 +1,33 @@
 using Discount.API.Queries;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IDiscountCommandText, PostgreDiscountCommandText>();
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+var requeiredReadDiscountPolicy = new AuthorizationPolicyBuilder("scope", "discount_read_permission").Build();
+var requiredAuthorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(new AuthorizeFilter(requiredAuthorizationPolicy));
+    options.Filters.Add(new AuthorizeFilter(requeiredReadDiscountPolicy));
+});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.Authority = builder.Configuration["IdentityServerUrl"];
+    options.Audience = "resource_discount";
+    options.RequireHttpsMetadata = false;
+});
+
 
 var app = builder.Build();
 
@@ -21,6 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
