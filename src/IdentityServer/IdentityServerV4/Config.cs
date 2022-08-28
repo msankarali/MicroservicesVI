@@ -16,6 +16,7 @@ namespace IdentityServerV4
             new ApiResource("resource_catalog"){Scopes = {"catalog_fullpermission"}},
             new ApiResource("resource_file_stock"){Scopes = {"file_stock_fullpermission"}},
             new ApiResource("resource_basket"){Scopes = {"basket_fullpermission"}},
+            new ApiResource("resource_discount"){Scopes = {"discount_fullpermission", "discount_read_permission", "discount_write_permission"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
 
         };
@@ -41,6 +42,9 @@ namespace IdentityServerV4
                 new ApiScope("catalog_fullpermission", "Full access to Catalog API"),
                 new ApiScope("file_stock_fullpermission", "Full access to Photo Stock API"),
                 new ApiScope("basket_fullpermission", "Full access to Basket API"),
+                new ApiScope("discount_fullpermission", "Full access to Discount API"),
+                new ApiScope("discount_read_permission", "Read access to Discount API"),
+                new ApiScope("discount_write_permission", "Write access to Discount API"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName, "Full access to IS4"),
 
             };
@@ -72,6 +76,7 @@ namespace IdentityServerV4
                         IdentityServerConstants.LocalApi.ScopeName,
                         "roles",
                         "basket_fullpermission",
+                        "discount_read_permission",
                     },
                     AccessTokenLifetime = 1 * 60 * 60,
                     RefreshTokenExpiration = TokenExpiration.Absolute,
