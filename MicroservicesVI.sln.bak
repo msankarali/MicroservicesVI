@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{CE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{0AE468D9-FBBB-4C71-9A5D-B311F187E697}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "Catalog.API\Catalog.API.csproj", "{FA88838F-33F7-4BC9-874E-EAC373EA1B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "src\Services\Catalog\Catalog.API\Catalog.API.csproj", "{FA88838F-33F7-4BC9-874E-EAC373EA1B05}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C61702B-2445-45EE-9190-744F5586E86C}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,9 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerV4", "src\IdentityServer\IdentityServerV4\IdentityServerV4.csproj", "{5FF171E7-6C37-4394-9776-5EE38C4713AF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhotoStock", "PhotoStock", "{A86733A9-1458-463D-A8DB-44A46FF039EF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileStock", "FileStock", "{A86733A9-1458-463D-A8DB-44A46FF039EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoStock.API", "src\Services\PhotoStock\PhotoStock.API\PhotoStock.API.csproj", "{E1D0D415-5312-4CB2-8B22-052C1000EA9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileStock.API", "src\Services\PhotoStock\PhotoStock.API\FileStock.API.csproj", "{E1D0D415-5312-4CB2-8B22-052C1000EA9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
