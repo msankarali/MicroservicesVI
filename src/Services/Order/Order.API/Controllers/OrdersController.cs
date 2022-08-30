@@ -10,7 +10,7 @@ using Utilities.Results;
 
 namespace Order.API.Controllers
 {
-    [Route("api/[controller]/[actions]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrdersController : BaseController
     {
