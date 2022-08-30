@@ -4,6 +4,8 @@ namespace Order.Domain.OrderAggregate
 {
     public class OrderItem : Entity
     {
+        private OrderItem() { }
+
         public string ProductId { get; private set; }
         public string ProductName { get; private set; }
         public string PictureUrl { get; private set; }
