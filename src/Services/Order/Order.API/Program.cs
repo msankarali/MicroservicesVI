@@ -1,5 +1,8 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Order.Infrastructure;
+using System.Reflection;
+using Utilities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,10 @@ builder.Services.AddDbContext<OrderDbContext>(options =>
             cfg.MigrationsAssembly($"{nameof(Order)}.{nameof(Order.Infrastructure)}");
         });
 });
+
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
 var app = builder.Build();
 
