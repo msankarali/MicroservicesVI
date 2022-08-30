@@ -4,6 +4,8 @@ namespace Order.Domain.OrderAggregate
 {
     public class Order : Entity, IAggregateRoot
     {
+        private Order() { }
+
         public DateTime CreatedDate { get; private set; }
         public Address Address { get; private set; } //Owned Entity Type - columns in Order table or another table with columns
         public string BuyerId { get; private set; } //Shadow property
