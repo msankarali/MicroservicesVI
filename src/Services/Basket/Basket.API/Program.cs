@@ -13,14 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.Authority = builder.Configuration["IdentityServerUrl"];
-    options.Audience = "resource_basket";
-    options.RequireHttpsMetadata = false;
-});
-
 builder.Services.AddScoped<IBasketService, BasketService>();
 
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSettings"));
@@ -37,6 +29,12 @@ builder.Services.AddSingleton<RedisService>(sp =>
 
 var requiredAuthorizationPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.Authority = builder.Configuration["IdentityServerUrl"];
+    options.Audience = "resource_basket";
+    options.RequireHttpsMetadata = false;
+});
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter(requiredAuthorizationPolicy));
