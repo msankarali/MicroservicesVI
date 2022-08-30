@@ -37,7 +37,7 @@ builder.Services.AddDbContext<OrderDbContext>(options =>
         });
 });
 
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("Order.Application"));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
