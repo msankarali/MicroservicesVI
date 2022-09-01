@@ -6,19 +6,6 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-using (var scope = builder.Services.BuildServiceProvider().CreateScope())
-{
-    var serviceProvider = scope.ServiceProvider;
-
-    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
-
-    if (!categoryService.GetAllAsync().Result.Data.Any())
-    {
-        categoryService.CreateAsync(new Catalog.API.Dtos.CategoryCreateDto { Name = "C# 10" }).Wait();
-        categoryService.CreateAsync(new Catalog.API.Dtos.CategoryCreateDto { Name = ".Net 6" }).Wait();
-    }
-}
-
 // Add services to the container.
 
 builder.Services.AddControllers(options =>
@@ -34,11 +21,24 @@ builder.Services.AddSingleton<IDatabaseSettings>(sp =>
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+
+    if (!categoryService.GetAllAsync().Result.Data.Any())
+    {
+        categoryService.CreateAsync(new Catalog.API.Dtos.CategoryCreateDto { Name = "C# 10" }).Wait();
+        categoryService.CreateAsync(new Catalog.API.Dtos.CategoryCreateDto { Name = ".Net 6" }).Wait();
+    }
+}
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
