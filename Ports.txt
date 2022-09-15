@@ -8,3 +8,4 @@ Services
 
 • IdentityServerV4 => 5001
 • Gateway => 5000
+• Web App => 5010
