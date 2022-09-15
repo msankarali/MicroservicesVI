@@ -62,7 +62,7 @@ namespace IdentityServerV4
                 {
                     ClientName = "Asp.Net Core MVC",
                     ClientId = "WebMvcClient",
-                    ClientSecrets = {new Secret("secret".Sha256())},
+                    ClientSecrets = {new Secret("secret".Sha256())}, //secret infos will be stored in dockerized container
                     AllowedGrantTypes = GrantTypes.ClientCredentials, // it has no refresh-token
                     AllowedScopes =
                     {
@@ -77,7 +77,7 @@ namespace IdentityServerV4
                     ClientName = "Asp.Net Core MVC",
                     ClientId = "WebMvcClientForUser",
                     AllowOfflineAccess = true,
-                    ClientSecrets = {new Secret("secret".Sha256())},
+                    ClientSecrets = {new Secret("secret".Sha256())}, //secret infos will be stored in dockerized container
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword, // it generated refresh-token
                     AllowedScopes =
                     {
