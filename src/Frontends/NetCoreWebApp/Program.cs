@@ -1,3 +1,5 @@
+using NetCoreWebApp.Services.Abstract;
+using NetCoreWebApp.Services.Concrete;
 using NetCoreWebApp.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 
 var app = builder.Build();
 

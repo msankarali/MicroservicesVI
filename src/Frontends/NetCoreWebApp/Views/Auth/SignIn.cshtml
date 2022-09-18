@@ -11,6 +11,7 @@
                     <div class="logo mb-3">
                         <div class="col-md-12 text-center">
                             <h1>Sign in</h1>
+                            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         </div>
                     </div>
                     <form asp-controller="Auth" asp-action="SignIn" method="post">
