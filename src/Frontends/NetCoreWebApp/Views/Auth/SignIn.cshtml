@@ -1,0 +1,42 @@
+﻿@model NetCoreWebApp.Dtos.SignInDto
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div id="first">
+                <div class="myform form ">
+                    <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                            <h1>Sign in</h1>
+                        </div>
+                    </div>
+                    <form asp-controller="Auth" asp-action="SignIn" method="post">
+                        <div class="form-group">
+                            <label asp-for="Email">Email address</label>
+                            <input type="email" asp-for="Email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password">Password</label>
+                            <input type="password" asp-for="Password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" asp-for="IsRemember" id="isRemember" class="form-check-input" aria-describedby="isRemember">
+                            <label asp-for="IsRemember">Remember me</label>
+                        </div>
+                        <div class="col-md-12 text-center ">
+                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Sign in</button>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
